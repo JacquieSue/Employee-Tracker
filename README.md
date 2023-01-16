@@ -20,6 +20,8 @@ SQL Challenge
 
 When you open the employee tracker, a list of options appear.  When the user clicks `view all departments` , you can see a list of all the departments and the corresponding department_id.  When you click `add department`, the user will be prompted to enter the name of the department that is being added, and once it's entered, a message appears stating `'<new-department> added as a department!'`. When the user scrolls down to and selects `view all roles`, a list appears, and you can see the role_id, job title, current salary, and the department_id.  When the user scrolls and selects `view all employees`, a list of all the current employees appears, and you can see the employees id, first name, last name, role_id, and manager_id.
 
+[Employee Tracker](../../Desktop/2023-01-16%2007-10-14.mp4)
+
 ## Credits
 
 Jacquelyn Pulliam
