@@ -1,6 +1,5 @@
-// const express = require('express');
-// const { application } = require('express');
-const { application } = require('express');
+const express = require('express');
+const app = express();
 const inquirer = require('inquirer');
 // Import and require mysql2
 const mysql = require('mysql2');
@@ -104,29 +103,43 @@ function viewAllEmployees() {
     })
 }
 function addDepartment() {
-    // db.query('SELECT * FROM department', function (err, results) {
-    //     if (err) throw err;
-    //     console.table(results);
-    // })
-    application.post('/db/department/addDepartment', ({ body }, res) => {
-        const sql = `INSERT INTO department (department_name)
-        VALUES (?)`;
-        const params = [body.department_name];
-        db.query(sql, params, (err, result) => {
-            console.table(results);
-        });
-    });
+    inquirer
+        .prompt([
+            {
+                name: 'department_name',
+                message: 'What department do you want to add?',
+            }
+        ])
+        .then(response => {
+            db.query('INSERT INTO department (department_name) VALUES (?)',
+                response.department_name,
+                function (err, results) {
+                    if (err) throw err;
+                    console.log(`${response.department_name} added as a department!`)
+                    init();
+                })
+
+        })
 }
 
-
 function addEmployee() {
-    // inquirer.prompt([{}])
-    application.post('/db/department/addDepartment')
-    db.query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ? ? ? ?', data.first, data.last, data.roleId, data.managerId, function (err, results) {
-        if (err) throw err;
-        console.table(results);
-        init();
-    })
+    inquirer
+        .prompt([
+            {
+                name: 'employee_name',
+                message: 'Which employee do you want to add?',
+            }
+    ])
+    .then(response => {
+        db.query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?)',
+            response.newEmployee,
+            function (err, results) {
+                if (err) throw err;
+                console.log(`${response.newEmployee} added as an employee`)
+                init();
+            })
+    
+        })
 }
 
 function updateEmployeeRole() {
